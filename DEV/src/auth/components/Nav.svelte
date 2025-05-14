@@ -1,7 +1,21 @@
 <script>
-import { user, loginWithGoogle } from '../components/Auth.svelte'
+    import { url } from '@roxi/routify';
+    import { Button, Menu } from '../components'
+import { user, loginWithGoogle, logout } from '../components/Auth.svelte';
+
+let _user;
+user.subscribe((v) => (_user = v))
     </script>
 
-    <main>
-        <button on:click={loginWithGoogle}>Login with Google</button>
+    <main class="w-full flex justify-between items-center bg-red-500 p-4 text-white">
+        <div class="bg-white p-1 roundedd-full">
+            <a hre={$url('../')}>
+                <img class=" w-8 h-8" src="images/logo.png" />
+                </a>
+            </div>
+        {#if _user}
+        <Menu user={_user} on:confirmLogout={logout}/>
+        {:else}
+        <Button title="Login with Google" white on:click={loginWithGoogle}/>
+        {/if}
     </main>
