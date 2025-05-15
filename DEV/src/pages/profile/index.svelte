@@ -1,5 +1,9 @@
 <script>
 import { random } from 'lodash';
+import { getPokemonById } from '../services';
+import { addPokemonToStore } from '../components/Pokemon.svelte'
+import { Loading, ListItem } from '../components';
+
 let list = [];
 let isLoading = false;
 
@@ -7,11 +11,34 @@ const getRandomPokemons = async () => {
     list = new Array()
     isLoading = true;
 // console.log(random(0, 806))
+for (let i = 0; i < 5; i++)
+{
+    let randomId = random(0, 806);
+    await getPokemonById(randomId)
+    .then((pokemon) => {
+        list.push({ id: randomId, ...pokemon});
+        addPokemonToStore(pokemon);
+    })
+    .catch((err) => {
+        reject(err)
+    })   
+}
+isLoading = false;
 };
 
 getRandomPokemons()
 </script>
 
     <main>
-        <h1>index</h1>
+        <div class="w-full lg:w-2/4 mx-auto px-1">
+            {#if isLoading}
+            <Loading />
+            {:else if !list.length}
+            <p>no result</p>
+            {:else}
+            {#each list as pokemon}
+           <ListItem {pokemon}/>
+       {/each}
+        {/if}
+    </div>
     </main>

@@ -65,3 +65,32 @@ resolve(snapshot.val())
 })
     })
 }
+
+export function SET_FAVORITE_TO_USER(pokemonId, userId)
+{
+    return new Promise((resolve, reject)  => {
+        let userRef = firebase.firestore().collection(COLLECTION_USERS).doc(userId)
+
+userRef
+.get()
+.then((userDoc) => {
+    if(!userDoc.exists) {
+        let existingFavorites = userDoc.data().favorites
+        let newFav = !existingFavorites.includes(pokemonId) ? [...existingFavorites pokemonId] :
+        remove(existingFavorites, (x) => {return x !== pokemonId})
+        
+        userRef
+        .update({
+            "favorites": newFav
+        })
+    resolve(newFav)
+    }
+    resolve()
+})
+
+        .catch((err) => {
+           console.log(err) // reject(err)
+        })
+})
+}
+
