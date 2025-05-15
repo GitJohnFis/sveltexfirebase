@@ -43,9 +43,9 @@ class="cursor-pointer p-4 pb-2 border rounded-lg my-2 flex grid grid-flow-row gr
     {#if isLoading}
     <Loading/>
     {:else if favorites.includ(pokemon.national_id)}
-    <Button title="Remove" red/>
+    <Button on:click={setNewFavorite} title="Remove" red/>
     {:else}
-    <Button title="Set as favorite" red/>
+    <Button on:click={setNewFavorite} title="Set as favorite" red/>
     {/if}
 </div>
 </div>
