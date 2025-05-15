@@ -37,6 +37,10 @@
 use:clickOutside
 on:click_outside={handleClickOutside}>
 {#each menuOptions as option, i}
+<a href={$url(option.path)} key={i} >
+    {option.title}
+    </a>
+{/each}
 <p class="text-red-500" on:click={() => dispatch('confirmLogout')}>
     Logout
 </p>

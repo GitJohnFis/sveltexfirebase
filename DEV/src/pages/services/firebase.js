@@ -66,6 +66,25 @@ resolve(snapshot.val())
     })
 }
 
+export function GET_POKEMON_BY_NAME(name)
+{
+    return new Promise(async (resolve, reject)  => {
+firebase
+.database()
+.ref()
+.child(DATABASE_NAME)
+.orderByChild('name')
+.equalTo(name)
+.on("value", function(snapshot){
+    resolve(snapshot.val())
+    })
+.catch((error) => {
+    console.log(error)
+    reject(error)
+})
+    })
+}
+
 export function GET_POKEMON_NATIONAL_NUMBER(id)
 {
     return new Promise(async (resolve, reject)  => {
@@ -109,3 +128,8 @@ userRef
 })
 }
 
+// .then(function(snapshot){
+//     if(snapshot.exists()){
+//     resolve(snapshot.val())
+//     }
+//     })
