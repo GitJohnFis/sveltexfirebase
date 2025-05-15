@@ -1,8 +1,18 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     import { clickOutside } from '../services/clickOutside';
+    import { url } from '@roxi/routify';
+
     export let user;
     export let isOpen = false;
+
+    let menuOptions = [{
+        path: "/",
+        title: "Menu"
+    },{
+        path: "/profile",
+        title: "My profile"
+    }]
 
     const dispatch = createEventDispatcher();
     function handleClickOutside() 
@@ -26,7 +36,10 @@
 <div class="flex flex-col text-right absolute border top-16 right-0 bg-white rounded-lg p-4 text-black pl-32"
 use:clickOutside
 on:click_outside={handleClickOutside}>
-<p class="text-red-500" on:click={() => dispatch('confirmLogout')}>Logout</p>
+{#each menuOptions as option, i}
+<p class="text-red-500" on:click={() => dispatch('confirmLogout')}>
+    Logout
+</p>
 </div>
  {/if}
  </div>
