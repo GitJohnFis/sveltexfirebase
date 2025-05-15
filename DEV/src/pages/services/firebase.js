@@ -66,6 +66,21 @@ resolve(snapshot.val())
     })
 }
 
+export function GET_POKEMON_NATIONAL_NUMBER(id)
+{
+    return new Promise(async (resolve, reject)  => {
+firebase
+.database()
+.ref()
+.child(DATABASE_NAME)
+.orderByChild('national_number')
+.equalTo(id)
+.on("value", function(snapshot){
+resolve(snapshot.val())
+})
+})
+}
+
 export function SET_FAVORITE_TO_USER(pokemonId, userId)
 {
     return new Promise((resolve, reject)  => {
