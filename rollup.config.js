@@ -38,10 +38,9 @@ const serve = () => ({
     }
 })
 
-
 export default {
     preserveEntrySignatures: false,
-    input: ['src/imain.js'],
+    input: ['src/main.js'],
     output: {
         sourcemap: true,
         format: 'esm',
@@ -49,14 +48,14 @@ export default {
         // for performance disabling the filename hashing in development
         chunkFileNames:`{name}${production && '-[hash]' || ''}.js`
     },
-    plugins {
+    plugins: [
         svelte({
-            dev: !production, //run time checks
+            dev: !production, //run-time checks
             //Extract component CSS  = better perfromance
             css: css => css.write('bundle.css'),
             hot: isNollUp,
             preprocess: [
-                autopreprocess({
+                autoPreprocess({
                     postcss: require('./postcss.config.js'),
                     defaults: { style: 'postcss' }
                 })

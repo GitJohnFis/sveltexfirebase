@@ -20,5 +20,4 @@
     <Button on:click={loginWithGoogle} title="Sign in with Google"/>
     {/if}
     </div>
-    <!-- <Auth /> -->
 </main>

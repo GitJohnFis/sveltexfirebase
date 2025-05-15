@@ -110,7 +110,7 @@ userRef
 .then((userDoc) => {
     if(!userDoc.exists) {
         let existingFavorites = userDoc.data().favorites
-        let newFav = !existingFavorites.includes(pokemonId) ? [...existingFavorites pokemonId] :
+        let newFav = !existingFavorites.includes(pokemonId) ? [...existingFavorites, pokemonId] :
         remove(existingFavorites, (x) => {return x !== pokemonId})
         
         userRef

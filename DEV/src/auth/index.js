@@ -13,16 +13,16 @@ name: claims.name,
 email: claims.email,
 picture: claims.picture
     })
+  export const initAuth = (useRedirect = false) => {
+    const auth = new firebase.auth();
 
-    export const initAuth = (useRedirect = false) => {
-        const auth = new firebase.auth();
     const logout = () => auth.signOut();
     const loginWithGoogle = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         if (useRedirect) {
             return auth.signInWithRedirect(provider);
         } else {
-                return auth.signInWithPopup(provider);
+            return auth.signInWithPopup(provider);
             }
         }
 

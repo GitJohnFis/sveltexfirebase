@@ -17,7 +17,6 @@ class:disabled
 
 
 <style>
-
 .btn{
     @apply px-4 py-2 border rounded-lg outline-none;
 }
