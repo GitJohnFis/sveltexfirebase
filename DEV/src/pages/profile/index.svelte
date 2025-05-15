@@ -1,4 +1,5 @@
 <script>
+import { goto } from '@roxi/routify';
 import { random } from 'lodash';
 import { getPokemonById } from '../services';
 import { addPokemonToStore } from '../components/Pokemon.svelte'
@@ -26,6 +27,10 @@ for (let i = 0; i < 5; i++)
 isLoading = false;
 };
 
+const goToPokemons = (id) => {
+    $goto(`/pokemon/${id}`);
+};
+
 getRandomPokemons()
 </script>
 
@@ -37,7 +42,7 @@ getRandomPokemons()
             <p>no result</p>
             {:else}
             {#each list as pokemon}
-           <ListItem {pokemon}/>
+           <ListItem {pokemon} on:click={goToPokemon(pokemon.national_number)}/>
        {/each}
         {/if}
     </div>

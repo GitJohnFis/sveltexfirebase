@@ -1,15 +1,26 @@
 <script>
+import { user } from '../auth';
 import { userStore } from '../store'
 import { Label } from './Label.svelte';
 import { Loading } from './Loading.svelte';
 import { Button } from './Button./svelte';
+import { setPokemonAsFavorite } from '../services'
 
 
 export let pokemon;
+let _user;
 let isLoading = false;
 let favorites = []
 
+user.subscribe((v) => (_user = v));
 userStore.subscribe((v) => (favorites = v.favorites));
+
+const setNewFavorite = async () => {
+    await setPokemonAsFavorite(pokemon.national_number, user.id)
+    .then((data) => {
+        userStore.set('favorites', data)
+    })
+};
 </script>
 
 <div
